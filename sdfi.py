@@ -93,12 +93,21 @@ def scheduler(docs):
     return consolidator(counts)
 
 
-def main():
-    # TODO: error handling for non-text files
+def is_valid_files(docs):
+    """
+    Determines validity of doc arguments. Checking for file existence and is a
+    text file.
+    Args:
+        docs (list): a list of text docs in str format
+    Returns:
+        (bool): T if file is valid, F otherwise
 
-    if len(sys.argv) < 2:
-        print("Expected text files")
-        sys.exit(1)
+    """
+    for doc in docs:
+        if not os.path.isfile(doc) or os.path.splitext(doc)[1] != '.txt':
+            return False
+    return True
+
 
 def main():
     """
