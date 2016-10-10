@@ -3,10 +3,10 @@
 import os
 import re
 import sys
+import argparse
 import itertools
 import collections
 import multiprocessing
-import time
 
 
 CHUNK_SIZE = 2500000  # Process 2,500,000 bytes at a time
@@ -94,7 +94,23 @@ def main():
         print("Expected text files")
         sys.exit(1)
 
-    docs = [os.path.abspath(doc) for doc in sys.argv[1::]]
+def main():
+    """
+    Main starting point for sdfi.
+    Parses command line arguments and pretty-prints the top 10 words.
+    """
+    parser = argparse.ArgumentParser(
+            prog='sdfi',
+            description='A Simple Distributed File Indexer')
+    parser.add_argument("file", nargs='+', help="file to index")
+    args = parser.parse_args()
+
+    if not is_valid_files(args.file):
+        print("sdfi: File must be in text format and must exist")
+        parser.print_help()
+        parser.exit()
+
+    docs = [os.path.abspath(doc) for doc in args.file]
     ten_most_common_words = scheduler(docs)
 
     print()
