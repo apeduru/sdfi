@@ -1,0 +1,51 @@
+DEV TEST
+--------------
+
+Congratulations for getting this far in the hiring process! Now we'd like to
+see a sample of your work following the specification below.  Once you've
+completed the challenge, we'll schedule a follow-up interview to discuss your
+work.
+
+
+# Simple Distributed File Indexer
+
+Our end goal is to create a command-line indexer application that finds the top
+10 words across a collection of documents. The outline below will assist you in
+developing it. You may use any programming language of your choice, but we
+suggest you use the one you are most comfortable with.
+
+We only require that you complete the first four steps. We want to see quality
+of code over quantity of features: develop this as though it needs to be
+maintained by yourself and others for some period of time. Please do not spend
+any more than 3 hours on this challenge; we want to be respectful of your time.
+
+- Write logic that takes a blob of text as a parameter and tokenizes this blob
+  into words. Words are delimited by any character other than a-z, A-Z, or 0-9.
+
+- Write logic to track all unique words encountered and the number of times
+  each was encountered. Words should be matched in a case-insensitive manner.
+  This should return the top 10 words (and their counts).
+
+- Provide some documentation for the code you wrote in each of the previous
+  steps.
+
+- You must test your code. Make sure you include some brief documentation on
+  how to run the tests. Any collection of plain text files can be used as
+  input, and we suggest you try out some free plain text books from
+  http://www.gutenberg.org/
+
+
+All of the following steps are optional. You may complete any number of them,
+or none at all.
+
+- Write a command-line interface for your indexer that takes the filenames of
+  text blobs as arguments, and then prints the top 10 words across all files to
+  standard output.
+
+- Use source control to help you develop this software. If possible, we'd like
+  you to post this on a public platform like GitHub or Bitbucket and then send
+  us a link.
+
+- Ensure that you can run your code in places other than your own development
+  environment, and provide installation/deployment instructions. Provide
+  documentation that walks the user through using your application.

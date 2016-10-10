@@ -1,0 +1,8 @@
+This is the first line.
+This is the second line.
+The line below is true.
+The line above is false.
+A short line.
+A very very very very very very very very very long line.
+A self-referential line.
+The last line.
