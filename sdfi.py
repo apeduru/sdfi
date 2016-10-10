@@ -14,10 +14,11 @@ CHUNK_SIZE = 2500000  # Process 2,500,000 bytes at a time
 
 def read_file_into_chunks(docs):
     """
+    Split a text doc into sizable chunks defined by CHUNK_SIZE
     Args:
-        docs
-    Returns:
-        iterator
+        docs (list): a list of text docs using full path in str format
+    Yields:
+        (str): an iterator of a chunk of text
     """
     for doc in docs:
         with open(doc, 'r') as f:
@@ -30,11 +31,11 @@ def read_file_into_chunks(docs):
 
 def flatten(lol):
     """
-    Flattens a list of lists into a single list of items in linear time
+    Flattens a list of lists into a single list in linear time
     Args:
-        lol: list of lists
+        lol (list): list of lists
     Returns:
-        flattened list
+        (list): a flattened list
     """
     return list(itertools.chain.from_iterable(lol))
 
@@ -44,40 +45,45 @@ def tokenizer(text):
     Tokenize case-insensitive string delimited by any character
     except a-z, A-Z, and 0-9
     Args:
-        text: a text str
+        text (str): a text str
     Returns:
-        list of words
+        (list): a list of words
     """
     return re.split('[^a-zA-Z0-9]+', text.strip(), flags=re.IGNORECASE)
 
 
 def worker(text):
     """
+    A worker process that Tokenizes a text blob into words
     Args:
-        text: a str that is tokenized into a list of words
+        text (str): Blob of text
     Returns:
-
+         (list): All words found in the text blob
     """
-    # word_list = tokenizer(text)
-    # return {word: word_list.count(word) for word in set(word_list)}
     return tokenizer(text)
 
 
-def consolidator(counts):
+def consolidator(words):
     """
+    Aggregates and counts the total
+    Args:
+        words (list): List of lists containing individual words
+    Returns:
+        (dict): Top 10 words and their counts in a dict
     """
-    word_list = flatten(counts)
+    word_list = flatten(words)
     wl = collections.Counter(word_list)
     return dict(wl.most_common(10))
 
 
 def scheduler(docs):
     """
-    Schedules the
+    Fires up a pool of workers and schedules them to count words from small
+    chunks of each doc file.
     Args:
-        docs: a list of full path text docs
+        docs (list): a list of text docs using full path in str format
     Returns:
-        results: the top 10 words across the list of text docs
+        (dict): the top 10 words across the list of text docs
     """
     pool = multiprocessing.Pool(processes=multiprocessing.cpu_count())
     counts = pool.map(worker, read_file_into_chunks(docs))
