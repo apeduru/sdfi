@@ -129,14 +129,14 @@ def main():
     ten_most_common_words = scheduler(docs)
 
     print()
-    print("Documents processed:", " ".join(os.path.basename(doc) for doc in docs))
+    print("Docs processed:", " ".join(os.path.basename(doc) for doc in docs))
     print()
-    print(ten_most_common_words)
+    print("Word : Count")
+    print("------------")
+    for word, count in ten_most_common_words.items():
+        print("{0} : {1}".format(word, count))
 
 
 if __name__ == '__main__':
-    start = time.time()
     main()
-    elapsed = time.time() - start
-    print("Time: {0} ms".format(elapsed * 1000))
     sys.exit(0)
