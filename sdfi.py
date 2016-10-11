@@ -85,7 +85,7 @@ def scheduler(docs):
         (list): Top 10 words and their counts as a tuple in decreasing order
     """
     pool = multiprocessing.Pool(processes=multiprocessing.cpu_count())
-    counts = pool.map(worker, read_file_into_chunks(docs))
+    counts_list = pool.map(worker, read_file_into_chunks(docs))
     pool.close()
     pool.join()
 
@@ -125,14 +125,14 @@ def main():
         parser.exit()
 
     docs = [os.path.abspath(doc) for doc in args.file]
-    ten_most_common_words = scheduler(docs)
+    ten_most_common_words_and_counts = scheduler(docs)
 
     print()
     print("Docs processed:", " ".join(os.path.basename(doc) for doc in docs))
     print()
     print("Word : Count")
     print("------------")
-    for word, count in ten_most_common_words.items():
+    for word, count in ten_most_common_words_and_counts:
         print("{0} : {1}".format(word, count))
 
 
