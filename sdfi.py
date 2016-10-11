@@ -9,7 +9,7 @@ import collections
 import multiprocessing
 
 
-CHUNK_SIZE = 2500000  # Process 2,500,000 bytes at a time
+CHUNK_SIZE = 10000  # Process 10,000 bytes at a time
 
 
 def read_file_into_chunks(docs):
