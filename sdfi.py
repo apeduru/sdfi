@@ -71,9 +71,8 @@ def consolidator(words):
     Returns:
         (list): Top 10 words and their counts as a tuple in decreasing order
     """
-    word_list = flatten(words)
-    wl = collections.Counter(word_list)
-    return dict(wl.most_common(10))
+    counted_words = collections.Counter(words)
+    return counted_words.most_common(10)
 
 
 def scheduler(docs):
@@ -90,7 +89,7 @@ def scheduler(docs):
     pool.close()
     pool.join()
 
-    return consolidator(counts)
+    return consolidator(flatten(counts_list))
 
 
 def is_valid_files(docs):
