@@ -43,7 +43,7 @@ def flatten(lol):
 def tokenizer(text):
     """
     Tokenize case-insensitive string delimited by any character
-    except a-z, A-Z, and 0-9
+    except a-z, A-Z, and 0-9 and removing empty strings.
     Args:
         text (str): a text str
     Returns:
@@ -67,9 +67,9 @@ def consolidator(words):
     """
     Aggregates and counts the total
     Args:
-        words (list): List of lists containing individual words
+        words (list): List containing individual words
     Returns:
-        (dict): Top 10 words and their counts in a dict
+        (list): Top 10 words and their counts as a tuple in decreasing order
     """
     word_list = flatten(words)
     wl = collections.Counter(word_list)
@@ -83,7 +83,7 @@ def scheduler(docs):
     Args:
         docs (list): a list of text docs using full path in str format
     Returns:
-        (dict): the top 10 words across the list of text docs
+        (list): Top 10 words and their counts as a tuple in decreasing order
     """
     pool = multiprocessing.Pool(processes=multiprocessing.cpu_count())
     counts = pool.map(worker, read_file_into_chunks(docs))
