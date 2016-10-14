@@ -49,7 +49,7 @@ def tokenizer(text):
     Returns:
         (list): a list of words
     """
-    return re.split('[^a-zA-Z0-9]+', text.strip(), flags=re.IGNORECASE)
+    return [word for word in re.split('[^\w]+', text.lower().strip()) if word]
 
 
 def worker(text):
