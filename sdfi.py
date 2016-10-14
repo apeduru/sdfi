@@ -14,7 +14,7 @@ CHUNK_SIZE = 10000  # Process 10,000 bytes at a time
 
 def read_file_into_chunks(docs):
     """
-    Split a text doc into sizable chunks defined by CHUNK_SIZE
+    Split a text doc into sizable chunks defined by CHUNK_SIZE.
     Args:
         docs (list): a list of text docs using full path in str format
     Yields:
@@ -31,7 +31,7 @@ def read_file_into_chunks(docs):
 
 def flatten(lol):
     """
-    Flattens a list of lists into a single list in linear time
+    Flattens a list of lists into a single list in linear time.
     Args:
         lol (list): list of lists
     Returns:
@@ -54,22 +54,22 @@ def tokenizer(text):
 
 def worker(text):
     """
-    A worker process that Tokenizes a text blob into words
+    A worker process.
     Args:
-        text (str): Blob of text
+        text (str): blob of text
     Returns:
-         (list): All words found in the text blob
+         (list): all words found in the text blob
     """
     return tokenizer(text)
 
 
 def consolidator(words):
     """
-    Aggregates and counts the total
+    Aggregates and counts each occurence of a word in a list of words.
     Args:
-        words (list): List containing individual words
+        words (list): list containing individual words
     Returns:
-        (list): Top 10 words and their counts as a tuple in decreasing order
+        (list): top 10 words and their counts as a tuple in decreasing order
     """
     counted_words = collections.Counter(words)
     return counted_words.most_common(10)
@@ -82,7 +82,7 @@ def scheduler(docs):
     Args:
         docs (list): a list of text docs using full path in str format
     Returns:
-        (list): Top 10 words and their counts as a tuple in decreasing order
+        (list): top 10 words and their counts as a tuple in decreasing order
     """
     pool = multiprocessing.Pool(processes=multiprocessing.cpu_count())
     counts_list = pool.map(worker, read_file_into_chunks(docs))
