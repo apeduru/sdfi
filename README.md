@@ -24,7 +24,7 @@ occurrence of each word, a feature that is left for the future...
 
 I chose to work with Python 3 for this project in order to prototype fairly quickly.
 In hindsight, a language with a better concurrency model may have offered easier
-development (and less headaches).
+development (and fewer headaches).
 
 ## Requirements
 
@@ -38,6 +38,8 @@ After cloning this repo and changing to the root directory of this project,
 run `sudo python3 setup.py install`.
 
 ### Windows
+
+If you are using Cygwin or MinGW follow the same steps for installing on Unix systems.
 
 ## Tests
 
